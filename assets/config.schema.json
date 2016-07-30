@@ -1,0 +1,603 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Markdownlint configuration schema",
+  "$ref": "#/definitions/configV2",
+  "definitions": {
+    "configV2": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "$ref": "#/definitions/rules"
+        },
+        "files": {
+          "$ref": "#/definitions/stringArray",
+          "default": []
+        },
+        "excludes": {
+          "$ref": "#/definitions/stringArray",
+          "default": []
+        }
+      }
+    },
+    "configV1": {
+      "$ref": "#/definitions/rules"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "description": "Default state for all rules",
+          "type": "boolean",
+          "default": true
+        },
+        "MD001": {
+          "description": "MD001/header-increment - Header levels should only increment by one level at a time",
+          "type": "boolean"
+        },
+        "header-increment": {
+          "$ref": "#/definitions/rules/properties/MD001"
+        },
+        "MD002": {
+          "description": "MD002/first-header-h1 - First header should be a top level header",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "level": {
+              "description": "Header level",
+              "type": "integer",
+              "default": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "first-header-h1": {
+          "$ref": "#/definitions/rules/properties/MD002"
+        },
+        "MD003": {
+          "description": "MD003/header-style - Header style",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "style": {
+              "description": "Header style",
+              "type": "string",
+              "enum": [
+                "consistent",
+                "atx",
+                "atx_closed",
+                "setext",
+                "setext_with_atx",
+                "setext_with_atx_closed"
+              ],
+              "default": "consistent"
+            }
+          },
+          "additionalProperties": false
+        },
+        "header-style": {
+          "$ref": "#/definitions/rules/properties/MD003"
+        },
+        "MD004": {
+          "description": "MD004/ul-style - Unordered list style",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "style": {
+              "description": "List style",
+              "type": "string",
+              "enum": [
+                "consistent",
+                "asterisk",
+                "plus",
+                "dash",
+                "sublist"
+              ],
+              "default": "consistent"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ul-style": {
+          "$ref": "#/definitions/rules/properties/MD004"
+        },
+        "MD005": {
+          "description": "MD005/list-indent - Inconsistent indentation for list items at the same level",
+          "type": "boolean"
+        },
+        "list-indent": {
+          "$ref": "#/definitions/rules/properties/MD005"
+        },
+        "MD006": {
+          "description": "MD006/ul-start-left - Consider starting bulleted lists at the beginning of the line",
+          "type": "boolean"
+        },
+        "ul-start-left": {
+          "$ref": "#/definitions/rules/properties/MD006"
+        },
+        "MD007": {
+          "description": "MD007/ul-indent - Unordered list indentation",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "indent": {
+              "description": "Spaces for indent",
+              "type": "integer",
+              "default": 2
+            }
+          },
+          "additionalProperties": false
+        },
+        "ul-indent": {
+          "$ref": "#/definitions/rules/properties/MD007"
+        },
+        "MD009": {
+          "description": "MD009/no-trailing-spaces - Trailing spaces",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "br_spaces": {
+              "description": "Spaces for line break",
+              "type": "integer",
+              "default": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "no-trailing-spaces": {
+          "$ref": "#/definitions/rules/properties/MD009"
+        },
+        "MD010": {
+          "description": "MD010/no-hard-tabs - Hard tabs",
+          "type": "boolean"
+        },
+        "no-hard-tabs": {
+          "$ref": "#/definitions/rules/properties/MD010"
+        },
+        "MD011": {
+          "description": "MD011/no-reversed-links - Reversed link syntax",
+          "type": "boolean"
+        },
+        "no-reversed-links": {
+          "$ref": "#/definitions/rules/properties/MD011"
+        },
+        "MD012": {
+          "description": "MD012/no-multiple-blanks - Multiple consecutive blank lines",
+          "type": "boolean"
+        },
+        "no-multiple-blanks": {
+          "$ref": "#/definitions/rules/properties/MD012"
+        },
+        "MD013": {
+          "description": "MD013/line-length - Line length",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "line_length": {
+              "description": "Number of characters",
+              "type": "integer",
+              "default": 80
+            },
+            "code_blocks": {
+              "description": "Exclude for code blocks",
+              "type": "boolean",
+              "default": true
+            },
+            "tables": {
+              "description": "Exclude for tables",
+              "type": "boolean",
+              "default": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "line-length": {
+          "$ref": "#/definitions/rules/properties/MD013"
+        },
+        "MD014": {
+          "description": "MD014/commands-show-output - Dollar signs used before commands without showing output",
+          "type": "boolean"
+        },
+        "commands-show-output": {
+          "$ref": "#/definitions/rules/properties/MD014"
+        },
+        "MD018": {
+          "description": "MD018/no-missing-space-atx - No space after hash on atx style header",
+          "type": "boolean"
+        },
+        "no-missing-space-atx": {
+          "$ref": "#/definitions/rules/properties/MD018"
+        },
+        "MD019": {
+          "description": "MD019/no-multiple-space-atx - Multiple spaces after hash on atx style header",
+          "type": "boolean"
+        },
+        "no-multiple-space-atx": {
+          "$ref": "#/definitions/rules/properties/MD019"
+        },
+        "MD020": {
+          "description": "MD020/no-missing-space-closed-atx - No space inside hashes on closed atx style header",
+          "type": "boolean"
+        },
+        "no-missing-space-closed-atx": {
+          "$ref": "#/definitions/rules/properties/MD020"
+        },
+        "MD021": {
+          "description": "MD021/no-multiple-space-closed-atx - Multiple spaces inside hashes on closed atx style header",
+          "type": "boolean"
+        },
+        "no-multiple-space-closed-atx": {
+          "$ref": "#/definitions/rules/properties/MD021"
+        },
+        "MD022": {
+          "description": "MD022/blanks-around-headers - Headers should be surrounded by blank lines",
+          "type": "boolean"
+        },
+        "blanks-around-headers": {
+          "$ref": "#/definitions/rules/properties/MD022"
+        },
+        "MD023": {
+          "description": "MD023/header-start-left - Headers must start at the beginning of the line",
+          "type": "boolean"
+        },
+        "header-start-left": {
+          "$ref": "#/definitions/rules/properties/MD023"
+        },
+        "MD024": {
+          "description": "MD024/no-duplicate-header - Multiple headers with the same content",
+          "type": "boolean"
+        },
+        "no-duplicate-header": {
+          "$ref": "#/definitions/rules/properties/MD024"
+        },
+        "MD025": {
+          "description": "MD025/single-h1 - Multiple top level headers in the same document",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "level": {
+              "description": "Header level",
+              "type": "integer",
+              "default": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "single-h1": {
+          "$ref": "#/definitions/rules/properties/MD025"
+        },
+        "MD026": {
+          "description": "MD026/no-trailing-punctuation - Trailing punctuation in header",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "punctuation": {
+              "description": "Punctuation characters",
+              "type": "string",
+              "default": ".,;:!?"
+            }
+          },
+          "additionalProperties": false
+        },
+        "no-trailing-punctuation": {
+          "$ref": "#/definitions/rules/properties/MD026"
+        },
+        "MD027": {
+          "description": "MD027/no-multiple-space-blockquote - Multiple spaces after blockquote symbol",
+          "type": "boolean"
+        },
+        "no-multiple-space-blockquote": {
+          "$ref": "#/definitions/rules/properties/MD027"
+        },
+        "MD028": {
+          "description": "MD028/no-blanks-blockquote - Blank line inside blockquote",
+          "type": "boolean"
+        },
+        "no-blanks-blockquote": {
+          "$ref": "#/definitions/rules/properties/MD028"
+        },
+        "MD029": {
+          "description": "MD029/ol-prefix - Ordered list item prefix",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "style": {
+              "description": "List style",
+              "type": "string",
+              "enum": [
+                "one",
+                "ordered"
+              ],
+              "default": "one"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ol-prefix": {
+          "$ref": "#/definitions/rules/properties/MD029"
+        },
+        "MD030": {
+          "description": "MD030/list-marker-space - Spaces after list markers",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "ul_single": {
+              "description": "Spaces for single-line unordered list items",
+              "type": "integer",
+              "default": 1
+            },
+            "ol_single": {
+              "description": "Spaces for single-line ordered list items",
+              "type": "integer",
+              "default": 1
+            },
+            "ul_multi": {
+              "description": "Spaces for multi-line unordered list items",
+              "type": "integer",
+              "default": 1
+            },
+            "ol_multi": {
+              "description": "Spaces for multi-line ordered list items",
+              "type": "integer",
+              "default": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "list-marker-space": {
+          "$ref": "#/definitions/rules/properties/MD030"
+        },
+        "MD031": {
+          "description": "MD031/blanks-around-fences - Fenced code blocks should be surrounded by blank lines",
+          "type": "boolean"
+        },
+        "blanks-around-fences": {
+          "$ref": "#/definitions/rules/properties/MD031"
+        },
+        "MD032": {
+          "description": "MD032/blanks-around-lists - Lists should be surrounded by blank lines",
+          "type": "boolean"
+        },
+        "blanks-around-lists": {
+          "$ref": "#/definitions/rules/properties/MD032"
+        },
+        "MD033": {
+          "description": "MD033/no-inline-html - Inline HTML",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "allowed_elements": {
+              "description": "Allowed elements",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            }
+          },
+          "additionalProperties": false
+        },
+        "no-inline-html": {
+          "$ref": "#/definitions/rules/properties/MD033"
+        },
+        "MD034": {
+          "description": "MD034/no-bare-urls - Bare URL used",
+          "type": "boolean"
+        },
+        "no-bare-urls": {
+          "$ref": "#/definitions/rules/properties/MD034"
+        },
+        "MD035": {
+          "description": "MD035/hr-style - Horizontal rule style",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "style": {
+              "description": "Horizontal rule style",
+              "type": "string",
+              "default": "consistent"
+            }
+          },
+          "additionalProperties": false
+        },
+        "hr-style": {
+          "$ref": "#/definitions/rules/properties/MD035"
+        },
+        "MD036": {
+          "description": "MD036/no-emphasis-as-header - Emphasis used instead of a header",
+          "type": "boolean"
+        },
+        "no-emphasis-as-header": {
+          "$ref": "#/definitions/rules/properties/MD036"
+        },
+        "MD037": {
+          "description": "MD037/no-space-in-emphasis - Spaces inside emphasis markers",
+          "type": "boolean"
+        },
+        "no-space-in-emphasis": {
+          "$ref": "#/definitions/rules/properties/MD037"
+        },
+        "MD038": {
+          "description": "MD038/no-space-in-code - Spaces inside code span elements",
+          "type": "boolean"
+        },
+        "no-space-in-code": {
+          "$ref": "#/definitions/rules/properties/MD038"
+        },
+        "MD039": {
+          "description": "MD039/no-space-in-links - Spaces inside link text",
+          "type": "boolean"
+        },
+        "no-space-in-links": {
+          "$ref": "#/definitions/rules/properties/MD039"
+        },
+        "MD040": {
+          "description": "MD040/fenced-code-language - Fenced code blocks should have a language specified",
+          "type": "boolean"
+        },
+        "fenced-code-language": {
+          "$ref": "#/definitions/rules/properties/MD040"
+        },
+        "MD041": {
+          "description": "MD041/first-line-h1 - First line in file should be a top level header",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "level": {
+              "description": "Header level",
+              "type": "integer",
+              "default": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "first-line-h1": {
+          "$ref": "#/definitions/rules/properties/MD041"
+        },
+        "MD042": {
+          "description": "MD042/no-empty-links - No empty links",
+          "type": "boolean"
+        },
+        "no-empty-links": {
+          "$ref": "#/definitions/rules/properties/MD042"
+        },
+        "MD043": {
+          "description": "MD043/required-headers - Required header structure",
+          "type": [
+            "boolean",
+            "object"
+          ],
+          "properties": {
+            "headers": {
+              "description": "List of headers",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            }
+          },
+          "additionalProperties": false
+        },
+        "required-headers": {
+          "$ref": "#/definitions/rules/properties/MD043"
+        },
+        "headers": {
+          "description": "headers - MD001, MD002, MD003, MD018, MD019, MD020, MD021, MD022, MD023, MD024, MD025, MD026, MD036, MD041, MD043",
+          "type": "boolean"
+        },
+        "bullet": {
+          "description": "bullet - MD004, MD005, MD006, MD007, MD032",
+          "type": "boolean"
+        },
+        "ul": {
+          "description": "ul - MD004, MD005, MD006, MD007, MD030, MD032",
+          "type": "boolean"
+        },
+        "indentation": {
+          "description": "indentation - MD005, MD006, MD007, MD027",
+          "type": "boolean"
+        },
+        "whitespace": {
+          "description": "whitespace - MD009, MD010, MD012, MD027, MD028, MD030, MD037, MD038, MD039",
+          "type": "boolean"
+        },
+        "hard_tab": {
+          "description": "hard_tab - MD010",
+          "type": "boolean"
+        },
+        "links": {
+          "description": "links - MD011, MD034, MD039, MD042",
+          "type": "boolean"
+        },
+        "blank_lines": {
+          "description": "blank_lines - MD012, MD022, MD031, MD032",
+          "type": "boolean"
+        },
+        "line_length": {
+          "description": "line_length - MD013",
+          "type": "boolean"
+        },
+        "code": {
+          "description": "code - MD014, MD031, MD038, MD040",
+          "type": "boolean"
+        },
+        "atx": {
+          "description": "atx - MD018, MD019",
+          "type": "boolean"
+        },
+        "spaces": {
+          "description": "spaces - MD018, MD019, MD020, MD021, MD023",
+          "type": "boolean"
+        },
+        "atx_closed": {
+          "description": "atx_closed - MD020, MD021",
+          "type": "boolean"
+        },
+        "blockquote": {
+          "description": "blockquote - MD027, MD028",
+          "type": "boolean"
+        },
+        "ol": {
+          "description": "ol - MD029, MD030, MD032",
+          "type": "boolean"
+        },
+        "html": {
+          "description": "html - MD033",
+          "type": "boolean"
+        },
+        "url": {
+          "description": "url - MD034",
+          "type": "boolean"
+        },
+        "hr": {
+          "description": "hr - MD035",
+          "type": "boolean"
+        },
+        "emphasis": {
+          "description": "emphasis - MD036, MD037",
+          "type": "boolean"
+        },
+        "language": {
+          "description": "language - MD040",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "default": {
+        "default": true
+      }
+    }
+  }
+}

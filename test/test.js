@@ -15,13 +15,23 @@ test('--help option', async t => {
   t.true(result.stdout.indexOf('--help') >= 0);
 });
 
+test('linting of incorrect config file fails', async t => {
+  try {
+    const result = await execa('../markdownlint.js',
+      ['--config', 'test-incorrect-config.json', 'correct.md']);
+    t.true(result.stderr.length > 0);
+  } catch (err) {
+    console.warn(err);
+  }
+});
+
 test('linting of correct Markdown file returns no error', async t => {
   try {
     const result = await execa('../markdownlint.js',
       ['--config', 'test-config.json', 'correct.md']);
     t.true(result.stderr.length === 0);
   } catch (err) {
-    console.log(err);
+    console.warn(err);
   }
 });
 
@@ -31,6 +41,26 @@ test('linting of incorrect Markdown file fails', async t => {
       ['--config', 'test-config.json', 'incorrect.md']);
     t.true(result.stderr.length > 0);
   } catch (err) {
-    console.log(err);
+    console.warn(err);
+  }
+});
+
+test('linting of correct Markdown file returns no error for old config', async t => {
+  try {
+    const result = await execa('../markdownlint.js',
+      ['--config', 'test-config.json', 'correct.md']);
+    t.true(result.stderr.length === 0);
+  } catch (err) {
+    console.warn(err);
+  }
+});
+
+test('linting of incorrect Markdown file fails for old config', async t => {
+  try {
+    const result = await execa('../markdownlint.js',
+      ['--config', 'test-config.json', 'incorrect.md']);
+    t.true(result.stderr.length > 0);
+  } catch (err) {
+    console.warn(err);
   }
 });

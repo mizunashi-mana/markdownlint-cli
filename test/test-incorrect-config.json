@@ -1,0 +1,5 @@
+{
+  "rules": {
+    "MD003": { "style": "nothing" }
+  }
+}
